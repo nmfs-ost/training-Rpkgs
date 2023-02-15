@@ -42,13 +42,18 @@ There are more examples on the [cowsay website](https://sckott.github.io/cowsay/
 
 ###  Examine the {cowsay} source code
 
-The source code for the cowsay R package [is available on GitHub](https://github.com/sckott/cowsay). We'll take a look at it's anatomy to better understand R packages.
+The source code for the cowsay R package [is available on GitHub](https://github.com/sckott/cowsay). We'll take a look at its anatomy to better understand R packages.
+
+::: {.callout-note}
+Need a reminder of R package anatomy (and other developer tips)? Download this handy [Package Development Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/package-development.pdf).
+:::
 
 ## Design an R package
 
 Our goal will be to build our own R package that uses {cowsay}. Split into groups of ~4 to start designing your R package! Write 2 functions that you want to include in it.
 
 Some things to think about:
+
 - What do you want to name your package?
 - Can you write a 2 sentence description of your package?
 - What functions would you like to put in the package?
@@ -59,8 +64,35 @@ Some things to think about:
 
 ### Where do we begin?
 
-{devtools} is an essential R package for the R package developer. It provides a diverse set of tools to make it quick and easy to use.
+[{devtools}](https://devtools.r-lib.org/) is an essential R package for the R package developer. It provides a diverse set of tools to make it quick and easy to use.
 
-{usethis} provides common r utilities for both r users and developers. In this case, we'll start by running `usethis::create_package()` will create a skeleton R package for you. No need to manually create a bunch of folders!
+[{usethis}](https://usethis.r-lib.org/) provides common r utilities for both r users and developers. In this case, we'll start by running `usethis::create_package()` will create a skeleton R package for you. No need to manually create a bunch of folders!
+
+Let's start by creating the package and add cowsay to our dependencies.
+
+```{r}
+#| eval=FALSE
+usethis::create_package()
+```
+
+We know that we are using cowsay in our codebase, so we will want to included it as a dependency. This means we'll add it to the Imports section of our DESCRIPTION file:
+```{r}
+#| eval=FALSE
+usethis::use_package("cowsay", type = "Imports")
+
+```
+
+
+### Edit the DESCRIPTION file
+
+Let's add in important metadata to our DESCRIPTION file. We'll open it up and replace the default elements with more specific metadata for our package.
+
+::: {.callout-note}
+Need more information on what goes in each section? The [Description Chapter of R Packages](https://r-pkgs.org/description.html) is a great reference.
+:::
+
+### Add in an R function
+
+
 
 
