@@ -1,29 +1,66 @@
 ---
 title: "Developing R packages"
 author: "Kathryn Doering"
+toc: true
 format:
   html:
     theme: cerulean
 editor: visual
 ---
 
-## Quarto
+## Poll
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+- Have you ever written documentation in the roxygen format?
+- Have you ever run the devtools functions like devtools::document() or devtools::check()?
 
-## Running Code
+## Let's dissect an R package!!
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+Before jumping into writing our own R package, let's check out someone else's.
 
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this
+### Introducing {cowsay}
 
 ```{r}
-#| echo: false
-2 * 2
+#install.packages("cowsay")
+library(cowsay)
+say("Welcome to cowsay!")
+
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+`cowsay::say()` returns an animal (by default, a cat) saying the message you included (yes, that is really it). You can also specify what animal you would like to say the message. `say()`is the only function in this package.
+
+```{r}
+say(what = "Let's look at cowsay!", by = "shark")
+```
+
+There is also an option to get a fact about cats:
+
+```{r}
+say(what = "catfact")
+```
+
+There are more examples on the [cowsay website](https://sckott.github.io/cowsay/).
+
+###  Examine the {cowsay} source code
+
+The source code for the cowsay R package [is available on GitHub](https://github.com/sckott/cowsay). We'll take a look at it's anatomy to better understand R packages.
+
+## Design an R package
+
+Our goal will be to build our own R package that uses {cowsay}. Split into groups of ~4 to start designing your R package! Write 2 functions that you want to include in it.
+
+Some things to think about:
+- What do you want to name your package?
+- Can you write a 2 sentence description of your package?
+- What functions would you like to put in the package?
+- How could you test your functions?
+- Which R packages would you need to rely on (in addition to cowsay)
+
+## Let's build our own R package! 
+
+### Where do we begin?
+
+{devtools} is an essential R package for the R package developer. It provides a diverse set of tools to make it quick and easy to use.
+
+{usethis} provides common r utilities for both r users and developers. In this case, we'll start by running `usethis::create_package()` will create a skeleton R package for you. No need to manually create a bunch of folders!
+
+
