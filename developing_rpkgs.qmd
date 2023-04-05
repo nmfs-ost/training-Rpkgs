@@ -13,6 +13,18 @@ editor: visual
 - Have you ever written documentation in the roxygen format?
 - Have you ever run the devtools functions like devtools::document() or devtools::check()?
 
+## Why create an R package?
+
+- The R packages book calls the R package "the fundamental unit of shareable, reusable, and reproducible R code"
+- organization
+- easy to share
+- framework for testing and documentation built in
+
+## When should I create an R package?
+
+- You have something you want to be organized, well tested, and/or well documented
+- You have something you want to share
+
 ## Let's dissect an R package!!
 
 Before jumping into writing our own R package, let's check out someone else's.
@@ -20,7 +32,9 @@ Before jumping into writing our own R package, let's check out someone else's.
 ### Introducing {cowsay}
 
 ```{r}
-#install.packages("cowsay")
+# install.packages("cowsay")
+# or you can install from github
+# remotes::install_github("sckott/cowsay")
 library(cowsay)
 say("Welcome to cowsay!")
 
@@ -50,15 +64,15 @@ Need a reminder of R package anatomy (and other developer tips)? Download this h
 
 ## Design an R package
 
-Our goal will be to build our own R package that uses {cowsay}. Split into groups of ~4 to start designing your R package! Write 2 functions that you want to include in it.
+Our goal will be to build our own R package that uses {cowsay}. Split into groups of ~4 to start designing your R package! Write 2 functions that you want to include in it. (Hint: look at the documentation for cowsay using `?cowsay::say` in the R console to see what is possible with the package)
 
-Some things to think about:
+Some questions to answer about the package:
 
 - What do you want to name your package?
 - Can you write a 2 sentence description of your package?
 - What functions would you like to put in the package?
 - How could you test your functions?
-- Which R packages would you need to rely on (in addition to cowsay)
+- Which R packages would you need to rely on (in addition to cowsay)?
 
 ## Let's build our own R package! 
 
@@ -82,7 +96,6 @@ usethis::use_package("cowsay", type = "Imports")
 
 ```
 
-
 ### Edit the DESCRIPTION file
 
 Let's add in important metadata to our DESCRIPTION file. We'll open it up and replace the default elements with more specific metadata for our package.
@@ -91,8 +104,139 @@ Let's add in important metadata to our DESCRIPTION file. We'll open it up and re
 Need more information on what goes in each section? The [Description Chapter of R Packages](https://r-pkgs.org/description.html) is a great reference.
 :::
 
+::: {.callout-tip}
+## Which License Should I Use?
+
+This is not an straightforward question, but MIT and versions of GPL are common licenses for [open source](https://opensource.org/) R packages. 
+[CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/) is also used, but 
+is [not intended for software](https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software). 
+Some additional guidance is 
+[in the Licenses for Government Work page of NMFS Open Science](https://nmfs-opensci.github.io/ResourceBook/content/licenses_gov.html#licenses) 
+and in the 
+[Licensing chapter of the R packages book](https://r-pkgs.org/license.html).
+:::
+
 ### Add in an R function
 
+R code is added in the `R/` directory. It is up to you to organize the R code there. Some authors like to put only one R function per package, others will organize seveal functions in the same script. 
+
+::: {.callout-note}
+The R package book provides some [suggestions on organizing R code](https://r-pkgs.org/code.html#sec-code-organising) as well as [suggestions to limit modifying global R settings](https://r-pkgs.org/code.html#sec-code-r-landscape).
+:::
+
+Need an R function to add? This one can be copied and pasted into your package.
+```{r}
+#| eval=FALSE
+shark_say <- function(words = "I'm a shark!") {
+  say(what = words, by = "shark")
+  invisible(words)
+}
+```
+
+### Try loading your package!
+
+`devtools::load_all()` is the standard way to load your packages and test them 
+out interactively. It simulates installing the package. Another alternative is `devtools::install_local()`, which actually installs the package locally in your R library.
+
+```{r}
+#| eval=FALSE
+devtools::load_all()
+```
+
+Did `devtools::load_all()` work? Try using one of the functions that you just added
+to your package. If not, let's troubleshoot.
+
+### Add documentation to your function
+
+R code is documented using [{roxygen2}](https://roxygen2.r-lib.org/). Here is an example of [through documention in cowsay::say](https://github.com/sckott/cowsay/blob/d2c105caa94e9ff1868550eecd16547686a5030b/R/say.r#L1) as well as [shorter documentation](https://github.com/sckott/cowsay/blob/main/R/endless_horse.R#L1).
+
+Using these examples, add documentation to the functions in your R package. Note that the `@export` tag should be used if you want users to be able to access the function directly.
+
+### Update the package documentation
+
+Use `devtools::document()` to automatically update the package's documentation.
+This will generate `.Rd` files in the `man/` folder and update the `NAMESPACE` 
+file. NEVER edit the `.Rd` and `NAMESPACE` files directly.
+
+If you would like to view your latest documentation, use `devtools::load_all()`, which automatically runs `devtools::document()`. The documentation can then be called as it normally would through R, e.g., by using `?pkg::function`.
+
+## Add Testing to your package
+
+### Introducing testthat
+
+[{testthat}](https://testthat.r-lib.org/) is the testing framework used for R code. 
+`{testthat}` can be used through `devtools::test()`. Let's look at [the tests in cowsay](https://github.com/sckott/cowsay/blob/d2c105caa94e9ff1868550eecd16547686a5030b/tests/testthat/test-say.R#L3).
 
 
+### Why Test?
+
+There are [many good reasons](https://r-pkgs.org/testing-basics.html#why-is-formal-testing-worth-the-trouble) for writing tests rather than testing 
+code interactively. Some of these are:
+
+- Ensure the code does what you think it does when you wrote it
+- Can help conceptualize the problem differently
+- Anyone can run your test
+- Testing saves you from yourself (every time you make a modification you run the test-- then you know right away if it broke).
+
+::: {.callout-note}
+More info on testing is available in this [testing and CI resources doc](https://docs.google.com/document/d/1niw8CzrnZJSeJ-0PQ4IYD9FH9hlO8qs63v0dE6AXYmI/edit?usp=sharing) (must be logged into your NOAA email address to view).
+:::
+
+### Add a test to your package
+
+`usethis::use_testthat()` gives us the structure we need for writing our first test! 
+
+Note that all test script names should begin with `test-` and a common practice is to use write all the tests for a .R script in a corresponding testing script the same name but appended by `test-` in the front. So for example, if the R code is in `R/sayfunctions.R`, all of the tests for that R code would be in `tests/testthat/test-sayfunctions.R`.
+
+Here is an example test for the sharksay function, to test that it does actually return the text specified by the user in `words`:
+
+```{r}
+#| eval=FALSE
+test_that("sharksay returns the text specified in words", {
+   phrase <- "Hi there"
+   phrase_from_sharksay <- sharksay(words = phrase)
+   expect_equal(phrase_from_sharksay, phrase)
+})
+```
+
+Add a test to your package!
+
+### Run the test
+
+Use `devtools::test()` to run all of the test. Check out the documentation for `devtools::test()` for ways to run just one of the test scripts. For example, use `devtools::test(filter = “place_holder”)` to run tests in `tests/testthat/test-place_holder.R`.
+
+### Debugging
+
+Debugging is necessary if your tests are failing. `traceback()` is one way that R code can be debugged. The Rstudio IDE is best integrated with this approach, although it can be used with other IDEs as well.
+
+## Check the package
+
+You want to make sure you set up the package correctly! You can do this by running `devtools::check()`. If it passes, your R package is valid and someone could download and use it! If it does not, you should get specific guidance on what needs to be fixed.
+
+## Sharing your R package
+
+R packages can be shared easily using online platforms like GitHub. For instance, anyone can install your package if it is up on github using `remotes::install_github()` or `devtools::install_github()` (devtools simply wraps the function in remotes).
+
+:::{.callout-note}
+Learn more about [using GitHub for work at NOAA Fisheries](https://nmfs-opensci.github.io/GitHub-Guide/)
+:::
+
+Sharing on CRAN, [rOpenSci](https://ropensci.org/), or the [NOAA Fisheries Integrated Toolbox](https://noaa-fisheries-integrated-toolbox.github.io/) are other possibilities for an R package with a wider audience.
+
+## Extras
+
+### Spellcheck
+
+`devtools::spell_check()` is a great tool for checking spelling mistakes in your package. It can be run using `devtools::spell_check()`. It wraps a function in [{spelling}](https://docs.ropensci.org/spelling/). There is an option to use the [WORDLIST](https://docs.ropensci.org/spelling/reference/wordlist.html) file to include words that aren't in the dictionary but are not spelling mistakes. `spelling::update_wordlist()` will automatically create this file for you.
+
+### Setting up GitHub Actions
+
+The [{ghactions4r}](https://nmfs-fish-tools.github.io/ghactions4r/) package can be used to simplify maintence and setup of common GitHub Action workflows for R packages.
+
+## References
+
+- [R packages book](https://r-pkgs.org/)
+- [Writing R extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html), the official CRAN documentation
+- [R packages Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/package-development.pdf)
+- [Eli Holmes' 2020 training on R packages](https://rverse-tutorials.github.io/RWorkflow-NWFSC-2020/week4-packages.html)
 
