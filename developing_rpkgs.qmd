@@ -8,10 +8,16 @@ format:
 editor: visual
 ---
 
-## Poll
+## NSAW Training Agenda
 
-- Have you ever written documentation in the roxygen format?
-- Have you ever run the devtools functions like devtools::document() or devtools::check()?
+9am - 12:30 pm (followed by lunch 12:30 - 2:30 pm)
+
+9 am - 9:15 am - Introductions and Poll
+9:15 am - 10:15am - Content
+10:15 am - 10:30 am - Break
+10:30 am - 11:30 am - Content
+11:30 am - 11:45 am - Break
+11:45 am - 12:30 pm - Content
 
 ## Why create an R package?
 
@@ -64,7 +70,11 @@ Need a reminder of R package anatomy (and other developer tips)? Download this h
 
 ## Design an R package
 
-Our goal will be to build our own R package that uses {cowsay}. Split into groups of ~4 to start designing your R package! Write 2 functions that you want to include in it. (Hint: look at the documentation for cowsay using `?cowsay::say` in the R console to see what is possible with the package)
+Our goal will be to build our own R package, either:
+1. Using functions you brought
+2. Using functions based on {cowsay}.
+
+Start designing your R package! Write 2 functions that you want to include in it. (Hint: look at the documentation for cowsay using `?cowsay::say` in the R console to see what is possible with the package)
 
 Some questions to answer about the package:
 
@@ -72,7 +82,7 @@ Some questions to answer about the package:
 - Can you write a 2 sentence description of your package?
 - What functions would you like to put in the package?
 - How could you test your functions?
-- Which R packages would you need to rely on (in addition to cowsay)?
+- Which R packages would you need to rely on to run the code in your package (in addition to cowsay)?
 
 ## Let's build our own R package! 
 
