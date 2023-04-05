@@ -239,4 +239,5 @@ The [{ghactions4r}](https://nmfs-fish-tools.github.io/ghactions4r/) package can 
 - [Writing R extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html), the official CRAN documentation
 - [R packages Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/package-development.pdf)
 - [Eli Holmes' 2020 training on R packages](https://rverse-tutorials.github.io/RWorkflow-NWFSC-2020/week4-packages.html)
+- [Package Development: The Mechanics clinic by Maëlle Salmon](https://rpkgdev-mechanics.netlify.app/)
 
