@@ -62,7 +62,7 @@ There are more examples on the [cowsay website](https://sckott.github.io/cowsay/
 
 ###  Examine the {cowsay} source code
 
-The source code for the cowsay R package [is available on GitHub](https://github.com/sckott/cowsay). We'll take a look at its anatomy to better understand R packages.
+The source code for the cowsay R package [is available on GitHub](https://github.com/sckott/cowsay). We'll take a look at its anatomy to better understand R packages but at it's base, an R package is essentially a collection of functions.
 
 ::: {.callout-note}
 Need a reminder of R package anatomy (and other developer tips)? Download this handy [Package Development Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/package-development.pdf).
@@ -78,7 +78,7 @@ Start designing your R package! Write 2 functions that you want to include in it
 
 Some questions to answer about the package:
 
-- What do you want to name your package?
+- What do you want to name your package? (packages have specific naming conventions, no "_" in names are allowed)
 - Can you write a 2 sentence description of your package?
 - What functions would you like to put in the package?
 - How could you test your functions?
@@ -97,6 +97,8 @@ Let's start by creating the package and add cowsay to our dependencies.
 ```{r}
 #| eval=FALSE
 usethis::create_package()
+
+# Will need to provide a file path with path = "your_filepath" if not working within a project at first. After you run create_package(), a R project will be created for your package.
 ```
 
 We know that we are using cowsay in our codebase, so we will want to included it as a dependency. This means we'll add it to the Imports section of our DESCRIPTION file:
@@ -138,10 +140,13 @@ Need an R function to add? This one can be copied and pasted into your package.
 ```{r}
 #| eval=FALSE
 shark_say <- function(words = "I'm a shark!") {
-  say(what = words, by = "shark")
+  cowsay::say(what = words, by = "shark")
   invisible(words)
 }
 ```
+Remember that you NEVER want to use `library()` before a function but rather `usethis::use_package("package")` to include a required package in the imports and you will always want to use the `package::function` convention, e.g. `cowsay::say()`.
+
+The `invisible()` function is useful instead of `return()` when you don't want the returned output to be printed, such as all of the output of a model.
 
 ### Try loading your package!
 
@@ -162,14 +167,37 @@ R code is documented using [{roxygen2}](https://roxygen2.r-lib.org/). Here is an
 
 Using these examples, add documentation to the functions in your R package. Note that the `@export` tag should be used if you want users to be able to access the function directly.
 
+A shortcut to add the {roxygen2} skeleton documentation is to click inside the function and then for Window: Ctrl+Alt+Shift+R and for Mac: Cmd+Option+Shift+R which will give you this:
+```{r}
+#' Title
+#'
+#' @param words 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+```
 ### Update the package documentation
 
-Use `devtools::document()` to automatically update the package's documentation.
+Use `devtools::document()` in your console or terminal to automatically update the package's documentation. 
 This will generate `.Rd` files in the `man/` folder and update the `NAMESPACE` 
 file. NEVER edit the `.Rd` and `NAMESPACE` files directly.
 
+You can also use `usethis::use_package_doc()` followed by to create a package documentation file that will show up when you use `?packagename`.
+
 If you would like to view your latest documentation, use `devtools::load_all()`, which automatically runs `devtools::document()`. The documentation can then be called as it normally would through R, e.g., by using `?pkg::function`.
 
+### Adding a vignette to your package
+If you would like to add a vignette to your package you can use `usethis::use_vignette("vignette_name")` which will set up a skeleton vignette as a .Rmd file.
+
+### Adding data to your package
+If there is data that you would like to make available in the package, you can include it using `usethis::use_data_raw()` which will create a folder called "data_raw" where you will paste/copy in your dataset. From there, you will edit the DATASET.R file that was automatically created.
+```{r}
+your_data <- read.csv("data-raw/your_data.csv", header = TRUE)
+usethis::use_data(your_data, overwrite = TRUE)
+```
+You will run this code and it will create the data file which contains your data as a .rda file which you can access with `data("your_data")`. You don't have to keep the data-raw folder after converting your data to .rda.
 ## Add Testing to your package
 
 ### Introducing testthat
@@ -198,6 +226,8 @@ More info on testing is available in this [testing and CI resources doc](https:/
 
 Note that all test script names should begin with `test-` and a common practice is to use write all the tests for a .R script in a corresponding testing script the same name but appended by `test-` in the front. So for example, if the R code is in `R/sayfunctions.R`, all of the tests for that R code would be in `tests/testthat/test-sayfunctions.R`.
 
+You can use `usethis::use_test(shark_say)` to create a testthat file where you can write your test. 
+
 Here is an example test for the sharksay function, to test that it does actually return the text specified by the user in `words`:
 
 ```{r}
@@ -217,7 +247,7 @@ Use `devtools::test()` to run all of the test. Check out the documentation for `
 
 ### Debugging
 
-Debugging is necessary if your tests are failing. `traceback()` is one way that R code can be debugged. The Rstudio IDE is best integrated with this approach, although it can be used with other IDEs as well.
+Debugging is necessary if your tests are failing. `traceback()` is one way that R code can be debugged. The Rstudio IDE is best integrated with this approach, although it can be used with other IDEs as well. Another useful function for debugging a function is the `browser()` function.
 
 ## Check the package
 
