@@ -122,6 +122,14 @@ Need more information on what goes in each section? The [Description Chapter of 
 :::
 
 ::: {.callout-tip}
+## Which version converntions should I use?
+
+To create a minimal R package, only package name and version number are needed in the DESCRIPTION file.
+Version is very important as a way of communicating where your package is in its lifecycle. 
+A released version number consists of three numbers, `<major>.<minor>.<patch>`. More details can be found in the [Lifecycle Chapter of R packages](https://r-pkgs.org/lifecycle.html#sec-lifecycle-version-number). 
+:::
+
+::: {.callout-tip}
 ## Which License Should I Use?
 
 This is not an straightforward question, but MIT and versions of GPL are common licenses for [open source](https://opensource.org/) R packages. 
@@ -159,7 +167,8 @@ The `invisible()` function is useful instead of `return()` when you don't want t
 ### Try loading your package!
 
 `devtools::load_all()` is the standard way to load your packages and test them 
-out interactively. It simulates installing the package. Another alternative is `devtools::install_local()`, which actually installs the package locally in your R library.
+out interactively. It simulates installing and loading a package with `library()`, 
+but it does not install the package on disk. Another alternative is `devtools::install_local()`, which actually installs the package locally in your R library.
 
 ```{r}
 #| eval=FALSE
@@ -173,7 +182,7 @@ to your package. If not, let's troubleshoot.
 
 R code is documented using [{roxygen2}](https://roxygen2.r-lib.org/). Here is an example of [thorough documention in cowsay::say](https://github.com/sckott/cowsay/blob/d2c105caa94e9ff1868550eecd16547686a5030b/R/say.r#L1) as well as [shorter documentation](https://github.com/sckott/cowsay/blob/main/R/endless_horse.R#L1).
 
-Using these examples, add documentation to the functions in your R package. Note that the `@export` tag should be used if you want users to be able to access the function directly.
+Using these examples, add documentation to the functions in your R package. Note that the `@export` tag should be used if you want users to be able to access the function directly. 
 
 A shortcut to add the {roxygen2} skeleton documentation is to click inside the function and then for Windows: `Ctrl+Alt+Shift+R` and for Mac: `Cmd+Option+Shift+R` which will give you this:
 ```{r}
@@ -187,18 +196,18 @@ A shortcut to add the {roxygen2} skeleton documentation is to click inside the f
 #'
 #' @examples
 ```
-### Update the package documentation
+### Update the package documentation and create a `NAMESPACE` file
 
 Use `devtools::document()` in your console or terminal to automatically update the package's documentation. 
 This will generate `.Rd` files in the `man/` folder and update the `NAMESPACE` 
-file. NEVER edit the `.Rd` and `NAMESPACE` files directly.
+file. NEVER edit the `.Rd` and `NAMESPACE` files directly. `NAMESPACE` file is generated with the {roxygen2} package, using specific tags (e.g., `@export`) located in a rosygen comment above each functions's definition. A specific namespace disambiguates functions with the same name (e.g., `remotes::install_github()` and `devtools::install_github()`). 
 
 You can also use `usethis::use_package_doc()` to create a package documentation file that will show up when you use `?packagename`.
 
 If you would like to view your latest documentation, use `devtools::load_all()`, which automatically runs `devtools::document()`. The documentation can then be called as it normally would through R, e.g., by using `?pkg::function` in the R console.
 
 ### Adding a vignette to your package
-If you would like to add a [vignette](https://r-pkgs.org/vignettes.html#advice-on-writing-vignettes) to your package you can use `usethis::use_vignette("vignette_name")` which will set up a skeleton vignette as a `.Rmd` file.
+Vignettes are instructive tutorials demonstrating practical uses of the package. If you would like to add a [vignette](https://r-pkgs.org/vignettes.html#advice-on-writing-vignettes) to your package you can use `usethis::use_vignette("vignette_name")` which will set up a skeleton vignette as a `.Rmd` file. You can build vignettes with the `devtools::build_vignettes()` function. The resulting vignettes will be in the inst/doc folder.  
 
 ### Adding data to your package
 If there is [data](https://r-pkgs.org/data.html) that you would like to make available in the package, you can include it using `usethis::use_data_raw()` which will create a folder called `data_raw` where you will add your dataset. From there, you will edit the `DATASET.R` file that was automatically created.
@@ -225,7 +234,7 @@ code interactively. Some of these are that testing:
 - Ensures the code does what you think it does when you wrote it
 - Helps conceptualize the problem differently
 - Allows anyone with the package code to run your test
-- Saves you from yourself! Every time you make a code modification you can easily run the test-- then you know right away if anything broke).
+- Saves you from yourself! Every time you make a code modification you can easily run the test-- then you know right away if anything broke.
 
 ::: {.callout-note}
 More info on testing is available in this [testing and CI resources doc](https://docs.google.com/document/d/1niw8CzrnZJSeJ-0PQ4IYD9FH9hlO8qs63v0dE6AXYmI/edit?usp=sharing) (must be logged into your NOAA email address to view).
@@ -281,6 +290,9 @@ Sharing on CRAN, [rOpenSci](https://ropensci.org/), or the [NOAA Fisheries Integ
 ### Spellcheck
 
 `devtools::spell_check()` is a great tool for checking spelling mistakes in your package. It can be run using `devtools::spell_check()`. It wraps a function in [{spelling}](https://docs.ropensci.org/spelling/). There is an option to use the [WORDLIST](https://docs.ropensci.org/spelling/reference/wordlist.html) file to include words that aren't in the dictionary but are not spelling mistakes. `spelling::update_wordlist()` will automatically create this file for you.
+
+### Style R code
+`styler::style_pkg()` style R code according to the [tidyverse style guide](https://style.tidyverse.org/). It helps to keep the coding style consistent across files.
 
 ### Setting up GitHub Actions
 
