@@ -10,26 +10,28 @@ editor: visual
 
 ## NSAW Training Agenda
 
-9am - 12:30 pm (followed by lunch 12:30 - 2:30 pm)
+9 am - 12:30 pm (followed by lunch 12:30 - 2 pm)
 
-9 am - 9:15 am - Introductions and Poll
-9:15 am - 10:15am - Content
-10:15 am - 10:30 am - Break
-10:30 am - 11:30 am - Content
-11:30 am - 11:45 am - Break
-11:45 am - 12:30 pm - Content
+- 9 am - 9:15 am - Introductions and Poll
+- 9:15 am - 10:15am - Content
+- 10:15 am - 10:30 am - Break
+- 10:30 am - 11:30 am - Content
+- 11:30 am - 11:45 am - Break
+- 11:45 am - 12:30 pm - Content
 
 ## Why create an R package?
 
-- The R packages book calls the R package "the fundamental unit of shareable, reusable, and reproducible R code"
-- organization
-- easy to share
-- framework for testing and documentation built in
+The R packages book calls the R package "the fundamental unit of shareable, reusable, and reproducible R code". Create an R package to:
+
+- organize code and/or data
+- share code and/or data easily
+- collaborate with others using standard conventions for organization
+- test and document using standard frameworks
 
 ## When should I create an R package?
 
 - You have something you want to be organized, well tested, and/or well documented
-- You have something you want to share
+- You have something you want to share or collaborate with others on
 
 ## Let's dissect an R package!!
 
@@ -62,7 +64,7 @@ There are more examples on the [cowsay website](https://sckott.github.io/cowsay/
 
 ###  Examine the {cowsay} source code
 
-The source code for the cowsay R package [is available on GitHub](https://github.com/sckott/cowsay). We'll take a look at its anatomy to better understand R packages but at it's base, an R package is essentially a collection of functions and/or data.
+The source code for the cowsay R package [is available on GitHub](https://github.com/sckott/cowsay). We'll take a look at its anatomy to better understand R packages but at its base, an R package is essentially a collection of functions and/or data.
 
 ::: {.callout-note}
 Need a reminder of R package anatomy (and other developer tips)? Download this handy [Package Development Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/package-development.pdf).
@@ -71,6 +73,7 @@ Need a reminder of R package anatomy (and other developer tips)? Download this h
 ## Design an R package
 
 Our goal will be to build our own R package, either:
+
 1. Using functions you brought
 2. Using functions based on {cowsay}.
 
@@ -78,11 +81,11 @@ Start designing your R package! Write 2 functions that you want to include in it
 
 Some questions to answer about the package:
 
-- What do you want to name your package? (according to [writing R Extensions](https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-structure), "[Package Names] should contain only (ASCII) letters, numbers and dot, have at least two characters and start with a letter and not end in a dot." This means no "_" in names are allowed)
-- Can you write a 2 sentence description of your package?
-- What functions would you like to put in the package?
-- How could you test your functions?
-- Which R packages would you need to rely on to run the code in your package (in addition to cowsay)?
+1. What do you want to name your package? (according to [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-structure), "[Package Names] should contain only (ASCII) letters, numbers and dot, have at least two characters and start with a letter and not end in a dot." This means no "_" in names are allowed)
+2. Can you write a 2 sentence description of your package?
+3. What functions would you like to put in the package?
+4. How could you test your functions?
+5. Which R packages do you need to rely on to run the code in your package (in addition to cowsay)?
 
 ## Let's build our own R package! 
 
@@ -90,7 +93,7 @@ Some questions to answer about the package:
 
 [{devtools}](https://devtools.r-lib.org/) is an essential R package for the R package developer. It provides a diverse set of tools to make it quick and easy to use.
 
-[{usethis}](https://usethis.r-lib.org/) provides common r utilities for both r users and developers. In this case, we'll start by running `usethis::create_package()` will create a skeleton R package for you. No need to manually create a bunch of folders!
+[{usethis}](https://usethis.r-lib.org/) provides common R utilities for both R users and R developers. In this case, we'll start by running `usethis::create_package()` will create a skeleton R package for you. No need to manually create a bunch of folders!
 
 Let's start by creating the package and add cowsay to our dependencies.
 
@@ -98,7 +101,9 @@ Let's start by creating the package and add cowsay to our dependencies.
 #| eval=FALSE
 usethis::create_package()
 
-# Will need to provide a file path with path = "your_filepath" if not working within a project at first. After you run create_package(), an Rstudio project will be created for your package.
+# You will need to provide a file path with path = "your_filepath" if not 
+# working within an Rstudio project at first. After you run create_package(),
+# an Rstudio project will be created for your package.
 ```
 
 If we are using cowsay in our codebase, so we will want to included it as a dependency. This means we'll add it to the Imports section of our DESCRIPTION file:
@@ -130,7 +135,11 @@ and in the
 
 ### Add in an R function
 
-R code is added in the `R/` directory. It is up to you to organize the R code there. Some authors like to put only one R function per package, others will organize seveal functions in the same script. 
+R code is added in the `R/` directory. It is up to you to organize the R code there. Some authors like to put only one R function per `.R` file, while others will organize several functions in the same script.
+
+::: {.callout-note}
+Some older packages may have `.r` (lowercase) file extensions. However, `.R` (uppercase) should always be used as the file extension for any scripts you create in your R package.
+:::
 
 ::: {.callout-note}
 The R package book provides some [suggestions on organizing R code](https://r-pkgs.org/code.html#sec-code-organising) as well as [suggestions to limit modifying global R settings](https://r-pkgs.org/code.html#sec-code-r-landscape).
@@ -144,7 +153,7 @@ shark_say <- function(words = "I'm a shark!") {
   invisible(words)
 }
 ```
-Remember that you NEVER want to use `library()` before a function but rather `usethis::use_package("package")` to include a required package in the imports. To use a function in a package you can either use the `package::function` convention in the code, e.g. `cowsay::say()` or include `@importFrom package function` (e.g., `@importFrom cowsay say) in the roxygen documentation of the function to use just `say()` in the code.
+Remember that you NEVER want to use `library()` before a function but rather `usethis::use_package("package")` to include a required package in the imports. To use a function in a package you can either use the `package::function` convention in the code, e.g. `cowsay::say()` or include `@importFrom package function` (e.g., `@importFrom cowsay say`) in the roxygen documentation of the function to use just `say()` in the code.
 The `invisible()` function is useful instead of `return()` when you don't want the returned output to be printed, such as when returning all of the output of a model.
 
 ### Try loading your package!
@@ -162,12 +171,13 @@ to your package. If not, let's troubleshoot.
 
 ### Add documentation to your function
 
-R code is documented using [{roxygen2}](https://roxygen2.r-lib.org/). Here is an example of [through documention in cowsay::say](https://github.com/sckott/cowsay/blob/d2c105caa94e9ff1868550eecd16547686a5030b/R/say.r#L1) as well as [shorter documentation](https://github.com/sckott/cowsay/blob/main/R/endless_horse.R#L1).
+R code is documented using [{roxygen2}](https://roxygen2.r-lib.org/). Here is an example of [thorough documention in cowsay::say](https://github.com/sckott/cowsay/blob/d2c105caa94e9ff1868550eecd16547686a5030b/R/say.r#L1) as well as [shorter documentation](https://github.com/sckott/cowsay/blob/main/R/endless_horse.R#L1).
 
 Using these examples, add documentation to the functions in your R package. Note that the `@export` tag should be used if you want users to be able to access the function directly.
 
-A shortcut to add the {roxygen2} skeleton documentation is to click inside the function and then for Window: Ctrl+Alt+Shift+R and for Mac: Cmd+Option+Shift+R which will give you this:
+A shortcut to add the {roxygen2} skeleton documentation is to click inside the function and then for Windows: `Ctrl+Alt+Shift+R` and for Mac: `Cmd+Option+Shift+R` which will give you this:
 ```{r}
+#| eval=FALSE
 #' Title
 #'
 #' @param words 
@@ -185,35 +195,37 @@ file. NEVER edit the `.Rd` and `NAMESPACE` files directly.
 
 You can also use `usethis::use_package_doc()` to create a package documentation file that will show up when you use `?packagename`.
 
-If you would like to view your latest documentation, use `devtools::load_all()`, which automatically runs `devtools::document()`. The documentation can then be called as it normally would through R, e.g., by using `?pkg::function`.
+If you would like to view your latest documentation, use `devtools::load_all()`, which automatically runs `devtools::document()`. The documentation can then be called as it normally would through R, e.g., by using `?pkg::function` in the R console.
 
 ### Adding a vignette to your package
-If you would like to add a [vignette](https://r-pkgs.org/vignettes.html#advice-on-writing-vignettes) to your package you can use `usethis::use_vignette("vignette_name")` which will set up a skeleton vignette as a .Rmd file.
+If you would like to add a [vignette](https://r-pkgs.org/vignettes.html#advice-on-writing-vignettes) to your package you can use `usethis::use_vignette("vignette_name")` which will set up a skeleton vignette as a `.Rmd` file.
 
 ### Adding data to your package
-If there is [data](https://r-pkgs.org/data.html) that you would like to make available in the package, you can include it using `usethis::use_data_raw()` which will create a folder called "data_raw" where you will paste/copy in your dataset. From there, you will edit the DATASET.R file that was automatically created.
+If there is [data](https://r-pkgs.org/data.html) that you would like to make available in the package, you can include it using `usethis::use_data_raw()` which will create a folder called `data_raw` where you will add your dataset. From there, you will edit the `DATASET.R` file that was automatically created.
 ```{r}
+#| eval=FALSE
 your_data <- read.csv("data-raw/your_data.csv", header = TRUE)
 usethis::use_data(your_data, overwrite = TRUE)
 ```
-You will run this code and it will create the data file which contains your data as a .rda file which you can access with `data("your_data")`. You don't have to keep the data-raw folder after converting your data to .rda.
-## Add Testing to your package
+You will run this code and it will create the data file which contains your data as a `.rda` file which you can access with `data("your_data")`. You don't have to keep the data-raw folder after converting your data to `.rda`.
 
-### Introducing testthat
+## Add testing to your package
+
+### Introducing {testthat}
 
 [{testthat}](https://testthat.r-lib.org/) is the testing framework used for R code. 
-`{testthat}` can be used through `devtools::test()`. Let's look at [the tests in cowsay](https://github.com/sckott/cowsay/blob/d2c105caa94e9ff1868550eecd16547686a5030b/tests/testthat/test-say.R#L3).
+{testthat} can be used through `devtools::test()`. Let's look at [the tests in cowsay](https://github.com/sckott/cowsay/blob/d2c105caa94e9ff1868550eecd16547686a5030b/tests/testthat/test-say.R#L3).
 
 
 ### Why Test?
 
 There are [many good reasons](https://r-pkgs.org/testing-basics.html#why-is-formal-testing-worth-the-trouble) for writing tests rather than testing 
-code interactively. Some of these are:
+code interactively. Some of these are that testing: 
 
-- Ensure the code does what you think it does when you wrote it
-- Can help conceptualize the problem differently
-- Anyone can run your test
-- Testing saves you from yourself (every time you make a modification you run the test-- then you know right away if it broke).
+- Ensures the code does what you think it does when you wrote it
+- Helps conceptualize the problem differently
+- Allows anyone with the package code to run your test
+- Saves you from yourself! Every time you make a code modification you can easily run the test-- then you know right away if anything broke).
 
 ::: {.callout-note}
 More info on testing is available in this [testing and CI resources doc](https://docs.google.com/document/d/1niw8CzrnZJSeJ-0PQ4IYD9FH9hlO8qs63v0dE6AXYmI/edit?usp=sharing) (must be logged into your NOAA email address to view).
@@ -223,7 +235,7 @@ More info on testing is available in this [testing and CI resources doc](https:/
 
 `usethis::use_testthat()` gives us the structure we need for writing our first test! 
 
-Note that all test script names should begin with `test-` and a common practice is to use write all the tests for a .R script in a corresponding testing script the same name but appended by `test-` in the front. So for example, if the R code is in `R/sayfunctions.R`, all of the tests for that R code would be in `tests/testthat/test-sayfunctions.R`.
+Note that all test script names should begin with `test-` and a common practice is to use write all the tests for a `.R` script in a corresponding testing script with the same name but prepended with `test-`. So for example, if the R code is in `R/sayfunctions.R`, all of the tests for that R code would be in `tests/testthat/test-sayfunctions.R`.
 
 You can use `usethis::use_test(shark_say)` to create a testthat file where you can write your test. 
 
@@ -238,11 +250,13 @@ test_that("sharksay returns the text specified in words", {
 })
 ```
 
-Add a test to your package!
+Note that there are many [expectations](https://testthat.r-lib.org/reference/index.html#expectations) that can be used depending on the expected output.
+
+Add a test to your package! 
 
 ### Run the test
 
-Use `devtools::test()` to run all of the test. Check out the documentation for `devtools::test()` for ways to run just one of the test scripts. For example, use `devtools::test(filter = “place_holder”)` to run tests in `tests/testthat/test-place_holder.R`.
+Use `devtools::test()` to run all of the tests. Check out the documentation for `devtools::test()` for ways to run just one of the test scripts. For example, use `devtools::test(filter = “place_holder”)` to run tests in `tests/testthat/test-place_holder.R`.
 
 ### Debugging
 
@@ -254,7 +268,7 @@ You want to make sure you set up the package correctly! You can do this by runni
 
 ## Sharing your R package
 
-R packages can be shared easily using online platforms like GitHub. For instance, anyone can install your package if it is up on github using `remotes::install_github()` or `devtools::install_github()` (devtools simply wraps the function in remotes).
+R packages can be shared easily using online platforms like GitHub. For instance, anyone can install your package if it is up on GitHub using `remotes::install_github()` or `devtools::install_github()`.
 
 :::{.callout-note}
 Learn more about [using GitHub for work at NOAA Fisheries](https://nmfs-opensci.github.io/GitHub-Guide/)
@@ -270,9 +284,11 @@ Sharing on CRAN, [rOpenSci](https://ropensci.org/), or the [NOAA Fisheries Integ
 
 ### Setting up GitHub Actions
 
-The [{ghactions4r}](https://nmfs-fish-tools.github.io/ghactions4r/) package can be used to simplify maintence and setup of common GitHub Action workflows for R packages.
+The [{ghactions4r}](https://nmfs-fish-tools.github.io/ghactions4r/) package can be used to simplify maintenance and setup of common GitHub Action workflows for R packages.
 
-## References
+## References for package development
+
+To continue learning about package development, here are some resources:
 
 - [R packages book](https://r-pkgs.org/)
 - [Writing R extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html), the official CRAN documentation
