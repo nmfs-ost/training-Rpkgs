@@ -98,7 +98,7 @@ Let's start by creating the package and add cowsay to our dependencies.
 #| eval=FALSE
 usethis::create_package()
 
-# Will need to provide a file path with path = "your_filepath" if not working within a project at first. After you run create_package(), a Rstudio project will be created for your package.
+# Will need to provide a file path with path = "your_filepath" if not working within a project at first. After you run create_package(), an Rstudio project will be created for your package.
 ```
 
 If we are using cowsay in our codebase, so we will want to included it as a dependency. This means we'll add it to the Imports section of our DESCRIPTION file:
