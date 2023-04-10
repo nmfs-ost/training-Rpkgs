@@ -175,7 +175,7 @@ R code is documented using [{roxygen2}](https://roxygen2.r-lib.org/). Here is an
 
 Using these examples, add documentation to the functions in your R package. Note that the `@export` tag should be used if you want users to be able to access the function directly.
 
-A shortcut to add the {roxygen2} skeleton documentation is to click inside the function and then for Windows: `Ctrl+Alt+Shift+R` and for Mac: `Cmd+Option+Shift+R` which will give you this:
+Within the RStudio IDE you can use a shortcut to add the {roxygen2} skeleton documentation. To do this, click inside the function and then for Windows: `Ctrl+Alt+Shift+R` and for Mac: `Cmd+Option+Shift+R` which will give you this:
 ```{r}
 #| eval=FALSE
 #' Title
