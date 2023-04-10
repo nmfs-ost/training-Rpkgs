@@ -1,6 +1,9 @@
 ---
 title: "Developing R packages"
-author: "Kathryn Doering"
+author: 
+  - Kathryn Doering
+  - Elizabeth Gugliotti
+  - Bai Li
 toc: true
 format:
   html:
@@ -122,11 +125,11 @@ Need more information on what goes in each section? The [Description Chapter of 
 :::
 
 ::: {.callout-tip}
-## Which version converntions should I use?
+## Which version conventions should I use?
 
 To create a minimal R package, only package name and version number are needed in the DESCRIPTION file.
 Version is very important as a way of communicating where your package is in its lifecycle. 
-A released version number consists of three numbers, `<major>.<minor>.<patch>`. More details can be found in the [Lifecycle Chapter of R packages](https://r-pkgs.org/lifecycle.html#sec-lifecycle-version-number). 
+A released version number consists of three numbers, `<major>.<minor>.<patch>`. More details can be found in the [Lifecycle Chapter of R packages](https://r-pkgs.org/lifecycle.html#sec-lifecycle-version-number). There are many versioning schemes, but a commonly used one is [semantic versioning](https://semver.org/).
 :::
 
 ::: {.callout-tip}
@@ -200,14 +203,14 @@ A shortcut to add the {roxygen2} skeleton documentation is to click inside the f
 
 Use `devtools::document()` in your console or terminal to automatically update the package's documentation. 
 This will generate `.Rd` files in the `man/` folder and update the `NAMESPACE` 
-file. NEVER edit the `.Rd` and `NAMESPACE` files directly. `NAMESPACE` file is generated with the {roxygen2} package, using specific tags (e.g., `@export`) located in a rosygen comment above each functions's definition. A specific namespace disambiguates functions with the same name (e.g., `remotes::install_github()` and `devtools::install_github()`). 
+file. NEVER edit the `.Rd` and `NAMESPACE` files directly. The `NAMESPACE` file is generated with the {roxygen2} package, using specific tags (e.g., `@export`) located in a roxygen comment above each functions's definition. A specific namespace disambiguates functions with the same name (e.g., `remotes::install_github()` and `devtools::install_github()`). 
 
 You can also use `usethis::use_package_doc()` to create a package documentation file that will show up when you use `?packagename`.
 
 If you would like to view your latest documentation, use `devtools::load_all()`, which automatically runs `devtools::document()`. The documentation can then be called as it normally would through R, e.g., by using `?pkg::function` in the R console.
 
 ### Adding a vignette to your package
-Vignettes are instructive tutorials demonstrating practical uses of the package. If you would like to add a [vignette](https://r-pkgs.org/vignettes.html#advice-on-writing-vignettes) to your package you can use `usethis::use_vignette("vignette_name")` which will set up a skeleton vignette as a `.Rmd` file. You can build vignettes with the `devtools::build_vignettes()` function. The resulting vignettes will be in the inst/doc folder.  
+Vignettes are instructive tutorials demonstrating practical uses of the package. If you would like to add a [vignette](https://r-pkgs.org/vignettes.html#advice-on-writing-vignettes) to your package you can use `usethis::use_vignette("vignette_name")` which will set up a skeleton vignette as a `.Rmd` file. You can build vignettes with the `devtools::build_vignettes()` function. The resulting vignettes will be in the `inst/doc` folder.  
 
 ### Adding data to your package
 If there is [data](https://r-pkgs.org/data.html) that you would like to make available in the package, you can include it using `usethis::use_data_raw()` which will create a folder called `data_raw` where you will add your dataset. From there, you will edit the `DATASET.R` file that was automatically created.
@@ -292,7 +295,7 @@ Sharing on CRAN, [rOpenSci](https://ropensci.org/), or the [NOAA Fisheries Integ
 `devtools::spell_check()` is a great tool for checking spelling mistakes in your package. It can be run using `devtools::spell_check()`. It wraps a function in [{spelling}](https://docs.ropensci.org/spelling/). There is an option to use the [WORDLIST](https://docs.ropensci.org/spelling/reference/wordlist.html) file to include words that aren't in the dictionary but are not spelling mistakes. `spelling::update_wordlist()` will automatically create this file for you.
 
 ### Style R code
-`styler::style_pkg()` style R code according to the [tidyverse style guide](https://style.tidyverse.org/). It helps to keep the coding style consistent across files.
+`styler::style_pkg()` styles R code according to the [tidyverse style guide](https://style.tidyverse.org/). It helps to keep the coding style consistent across files.
 
 ### Setting up GitHub Actions
 
