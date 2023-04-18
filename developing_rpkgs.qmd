@@ -241,15 +241,7 @@ two,5.5,4
 your_data <- read.csv("data-raw/your_data.csv", header = TRUE)
 usethis::use_data(your_data, overwrite = TRUE) #by default names the data the same as the object.
 ```
-You will run this code and it will create the data file which contains your data as a `.rda` file which you can access with `data("your_data")`. You don't have to keep the data-raw folder after converting your data to `.rda`.
-
-To access data in the R package, run `devtools::load_all()`, followed by:
-```{r}
-#| eval=FALSE
-data("your_data", package = "mypkg")
-your_data
-```
-
+Running the code above will create the data file which contains your data as a `.rda` file. The data can be accessed with `data("your_data")`. You don't have to keep the data-raw folder after converting your data to `.rda`, although it is recommended to [preserve a dataset's origin story](https://r-pkgs.org/data.html#sec-data-data-raw).
 
 ## Add testing to your package
 
@@ -279,7 +271,7 @@ More info on testing is available in this [testing and CI resources doc](https:/
 
 Note that all test script names should begin with `test-` and a common practice is to use write all the tests for a `.R` script in a corresponding testing script with the same name but prepended with `test-`. So for example, if the R code is in `R/sayfunctions.R`, all of the tests for that R code would be in `tests/testthat/test-sayfunctions.R`.
 
-You can use `usethis::use_test(shark_say)` to create a testthat file where you can write your test. 
+You can use `usethis::use_test()` to create a testthat file where you can write your test. You can specify the name of the R file, or have the .R file open in your IDE and usethis will figure out that you want to name the test file similarly.
 
 Here is an example test for the sharksay function, to test that it does actually return the text specified by the user in `words`:
 
@@ -287,14 +279,14 @@ Here is an example test for the sharksay function, to test that it does actually
 #| eval=FALSE
 test_that("sharksay returns the text specified in words", {
    phrase <- "Hi there"
-   phrase_from_sharksay <- sharksay(words = phrase)
+   phrase_from_sharksay <- shark_say(words = phrase)
    expect_equal(phrase_from_sharksay, phrase)
 })
 ```
 
 Note that there are many [expectations](https://testthat.r-lib.org/reference/index.html#expectations) that can be used depending on the expected output.
 
-Add a test to your package! 
+Add a test to your package! If you are testing the `shark_say()` function, try adding a test that shark_say() returns invisibly (hint: look through the expectations).
 
 ### Run the test
 
@@ -306,7 +298,7 @@ Use `devtools::test()` to run all of the tests. Check out the documentation for 
 
 ## Check the package
 
-You want to make sure you set up the package correctly! You can do this by running `devtools::check()`. If it passes, your R package is valid and someone could download and use it! If it does not, you should get specific guidance on what needs to be fixed.
+You want to make sure you set up the package correctly! You can do this by running `devtools::check()`. If it passes, your R package is valid and someone could download and use it! If it does not, the output has specific guidance on what needs to be fixed.
 
 ## Sharing your R package
 
