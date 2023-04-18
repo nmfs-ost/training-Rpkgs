@@ -15,12 +15,18 @@ editor: visual
 
 9 am - 12:30 pm (followed by lunch 12:30 - 2 pm)
 
-- 9 am - 9:15 am - Introductions and Poll
+- 9:00 am - 9:15 am - Introductions
 - 9:15 am - 10:15am - Content
 - 10:15 am - 10:30 am - Break
 - 10:30 am - 11:30 am - Content
 - 11:30 am - 11:45 am - Break
 - 11:45 am - 12:30 pm - Content
+
+## Set up
+
+Follow instructions in [R packages book system setup](https://r-pkgs.org/setup.html) to work locally. Note you can use your prefer IDE, if it is not Rstudio.
+
+Alternatively for GitHub Users, use a GitHub codespace.
 
 ## Why create an R package?
 
@@ -84,7 +90,7 @@ Start designing your R package! Write 2 functions that you want to include in it
 
 Some questions to answer about the package:
 
-1. What do you want to name your package? (according to [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-structure), "[Package Names] should contain only (ASCII) letters, numbers and dot, have at least two characters and start with a letter and not end in a dot." This means no "_" in names are allowed)
+1. What do you want to name your package? (according to [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-structure), "[Package Names] should contain only (ASCII) letters, numbers and dot, have at least two characters and start with a letter and not end in a dot." This means no "_" in names are allowed). [`pak::pkg_name_check()](https://pak.r-lib.org/reference/pkg_name_check.html) will tell you if a name is already used on CRAN.
 2. Can you write a 2 sentence description of your package?
 3. What functions would you like to put in the package?
 4. How could you test your functions?
