@@ -108,7 +108,7 @@ Let's start by creating the package and add cowsay to our dependencies.
 
 ```{r}
 #| eval=FALSE
-usethis::create_package()
+usethis::create_package(path = ".") # or change "." to other location.
 
 # You will need to provide a file path with path = "your_filepath" if not 
 # working within an Rstudio project at first. After you run create_package(),
@@ -118,7 +118,7 @@ usethis::create_package()
 If we are using cowsay in our codebase, so we will want to included it as a dependency. This means we'll add it to the Imports section of our DESCRIPTION file:
 ```{r}
 #| eval=FALSE
-usethis::use_package("cowsay", type = "Imports")
+usethis::use_package("cowsay")
 
 ```
 
@@ -162,7 +162,8 @@ Some older packages may have `.r` (lowercase) file extensions. However, `.R` (up
 The R package book provides some [suggestions on organizing R code](https://r-pkgs.org/code.html#sec-code-organising) as well as [suggestions to limit modifying global R settings](https://r-pkgs.org/code.html#sec-code-r-landscape).
 :::
 
-Need an R function to add? This one can be copied and pasted into your package.
+Need an R function to add? This one can be copied and pasted into your package. The function `usethis::use_r(name = "sharksay.R")` can be used to create the file for you in the R directory.
+
 ```{r}
 #| eval=FALSE
 shark_say <- function(words = "I'm a shark!") {
@@ -170,8 +171,12 @@ shark_say <- function(words = "I'm a shark!") {
   invisible(words)
 }
 ```
-Remember that you NEVER want to use `library()` before a function but rather `usethis::use_package("package")` to include a required package in the imports. To use a function in a package you can either use the `package::function` convention in the code, e.g. `cowsay::say()` or include `@importFrom package function` (e.g., `@importFrom cowsay say`) in the roxygen documentation of the function to use just `say()` in the code.
-The `invisible()` function is useful instead of `return()` when you don't want the returned output to be printed, such as when returning all of the output of a model.
+
+Some additional information on including the function in an R package:
+
+- Note that unlike in R scripts, calling `library()` before a function should not be done. Instead, use `usethis::use_package("packagename")` to include a required package in the imports (replace packagename with the name of the package). 
+- To use a function in a package you can either use the `package::function` convention in the code, e.g. `cowsay::say()` or include `@importFrom package function` (e.g., `@importFrom cowsay say`) in the roxygen documentation of the function to use just `say()` in the code.
+- The `invisible()` function is useful instead of `return()` when you don't want the returned output to be printed, such as when returning all of the output of a model.
 
 ### Try loading your package!
 
@@ -200,7 +205,7 @@ Within the RStudio IDE you can use a shortcut to add the {roxygen2} skeleton doc
 #'
 #' @param words 
 #'
-#' @return
+#' @returns
 #' @export
 #'
 #' @examples
@@ -213,19 +218,38 @@ file. NEVER edit the `.Rd` and `NAMESPACE` files directly. The `NAMESPACE` file 
 
 You can also use `usethis::use_package_doc()` to create a package documentation file that will show up when you use `?packagename`.
 
-If you would like to view your latest documentation, use `devtools::load_all()`, which automatically runs `devtools::document()`. The documentation can then be called as it normally would through R, e.g., by using `?pkg::function` in the R console.
+If you would like to view your latest documentation, use `devtools::load_all()`, which automatically runs `devtools::document()`. The documentation can then be called as it normally would through R, e.g., by using `?pkg::function` in the R console. (In codespaces, it may be necessary to open the html file generated and use an html extension like george-alisson.html-preview-vscode to preview; ctrl+shift+v is a shortcut to open the preview from the html file.)
 
 ### Adding a vignette to your package
-Vignettes are instructive tutorials demonstrating practical uses of the package. If you would like to add a [vignette](https://r-pkgs.org/vignettes.html#advice-on-writing-vignettes) to your package you can use `usethis::use_vignette("vignette_name")` which will set up a skeleton vignette as a `.Rmd` file. You can build vignettes with the `devtools::build_vignettes()` function. The resulting vignettes will be in the `inst/doc` folder.  
+Vignettes are instructive tutorials demonstrating practical uses of the package. If you would like to add a [vignette](https://r-pkgs.org/vignettes.html#advice-on-writing-vignettes) to your package you can use `usethis::use_vignette("vignette_name")` which will set up a skeleton vignette as a `.Rmd` file. You can build vignettes with the `devtools::build_vignettes()` function. The resulting vignettes will be in the `doc` folder.
 
 ### Adding data to your package
 If there is [data](https://r-pkgs.org/data.html) that you would like to make available in the package, you can include it using `usethis::use_data_raw()` which will create a folder called `data_raw` where you will add your dataset. From there, you will edit the `DATASET.R` file that was automatically created.
+
+If you would like to play around with some fake data, copy the following snippet into a .csv file:
+```
+#| eval=FALSE
+name,num,rank
+test,4.2,3
+me,3.3,2
+one,4.4,1
+two,5.5,4
+```
+
 ```{r}
 #| eval=FALSE
 your_data <- read.csv("data-raw/your_data.csv", header = TRUE)
-usethis::use_data(your_data, overwrite = TRUE)
+usethis::use_data(your_data, overwrite = TRUE) #by default names the data the same as the object.
 ```
 You will run this code and it will create the data file which contains your data as a `.rda` file which you can access with `data("your_data")`. You don't have to keep the data-raw folder after converting your data to `.rda`.
+
+To access data in the R package, run `devtools::load_all()`, followed by:
+```{r}
+#| eval=FALSE
+data("your_data", package = "mypkg")
+your_data
+```
+
 
 ## Add testing to your package
 
