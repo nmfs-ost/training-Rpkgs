@@ -13,26 +13,25 @@ editor: visual
 
 ## NSAW Training Agenda
 
-9 am - 12:30 pm (followed by lunch 12:30 - 2 pm)
+9 am - 12:30 pm (followed by lunch 12:30 pm - 2 pm)
 
 - 9:00 am - 9:15 am - Introductions
-- 9:15 am - 10:15am - Content
-- 10:15 am - 10:30 am - Break
-- 10:30 am - 11:30 am - Content
-- 11:30 am - 11:45 am - Break
-- 11:45 am - 12:30 pm - Content
+- 9:15 am - 10:30am - Content (Short bio break around 9:50 am)
+- 10:30 am - 11:00 am - Break (Coffee and Snacks)
+- 11:00 am - 12:20pm - Content (Short bio break around 11:50 am)
+- 12:20 pm - 12:30pm - Participant Feedback
 
 ## Set up
 
 Follow instructions in [R packages book system setup](https://r-pkgs.org/setup.html) to work locally. Note you can use your prefer IDE, if it is not Rstudio.
 
-Alternatively for GitHub Users, use a GitHub codespace.
+Alternatively for GitHub Users, use a GitHub codespace. We have created a [template with instructions](https://github.com/NSAWTraining/RpkgsCodespace) for using this option. Note that the IDE in Codespaces is VS code.
 
 ## Why create an R package?
 
 The R packages book calls the R package "the fundamental unit of shareable, reusable, and reproducible R code". Create an R package to:
 
-- organize code and/or data
+- organize code and/or data (or sometimes, other things like vignettes)
 - share code and/or data easily
 - collaborate with others using standard conventions for organization
 - test and document using standard frameworks
