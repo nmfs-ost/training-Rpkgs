@@ -16,9 +16,9 @@ editor: visual
 9 am - 12:30 pm (followed by lunch 12:30 pm - 2 pm)
 
 - 9:00 am - 9:15 am - Introductions
-- 9:15 am - 10:30am - Content (Short bio break around 9:50 am)
+- 9:15 am - 10:30am - Content (Short break around 9:50 am)
 - 10:30 am - 11:00 am - Break (Coffee and Snacks)
-- 11:00 am - 12:20pm - Content (Short bio break around 11:50 am)
+- 11:00 am - 12:20pm - Content (Short break around 11:50 am)
 - 12:20 pm - 12:30pm - Participant Feedback
 
 ## Set up
@@ -31,7 +31,7 @@ Alternatively for GitHub Users, use a GitHub codespace. We have created a [templ
 
 The R packages book calls the R package "the fundamental unit of shareable, reusable, and reproducible R code". Create an R package to:
 
-- organize code and/or data (or sometimes, other things like vignettes)
+- organize code and/or data (or sometimes, other things like vignettes or a [Shiny App](https://mastering-shiny.org/scaling-packaging.html#scaling-packaging))
 - share code and/or data easily
 - collaborate with others using standard conventions for organization
 - test and document using standard frameworks
