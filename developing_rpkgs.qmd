@@ -41,6 +41,21 @@ The R packages book calls the R package "the fundamental unit of shareable, reus
 - You have something you want to be organized, well tested, and/or well documented
 - You have something you want to share or collaborate with others on
 
+## Some example R packages
+
+Here are a few example R packages developed in part by folks at NOAA Fisheries. Exploring examples is a great way to learn more about R packages!
+
+- [r4ss](https://github.com/r4ss/r4ss)
+- [MARSS](https://github.com/atsa-es/MARSS)
+- [WHAM](https://github.com/timjmiller/wham)
+- [eSDM](https://github.com/smwoodman/eSDM)
+
+::: {.callout-tip}
+## See more examples
+You can find more examples by browsing the software tools in the [NOAA Fisheries Integrated Toolbox](https://noaa-fisheries-integrated-toolbox.github.io/) that have the "R package" keyword.
+:::
+
+
 ## Let's dissect an R package!!
 
 Before jumping into writing our own R package, let's check out someone else's.
