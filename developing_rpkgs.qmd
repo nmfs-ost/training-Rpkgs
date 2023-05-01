@@ -33,7 +33,7 @@ The R packages book calls the R package "the fundamental unit of shareable, reus
 
 - organize code and/or data (or sometimes, other things like vignettes or a [Shiny App](https://mastering-shiny.org/scaling-packaging.html#scaling-packaging))
 - share code and/or data easily
-- collaborate with others using standard conventions for organization
+- collaborate with others using standard conventions for organization (e.g., [IFA4EBFM](https://github.com/Bai-Li-NOAA/IFA4EBFM))
 - test and document using standard frameworks
 
 ## When should I create an R package?
