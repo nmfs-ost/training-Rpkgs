@@ -21,6 +21,12 @@ editor: visual
 - 11:00 am - 12:20pm - Content (Short break around 11:50 am)
 - 12:20 pm - 12:30pm - Participant Feedback
 
+## Code of Conduct
+
+*Remember, this is a **"Yes, And!" environment**. There are no wrong answers!* We are all here to learn and support each other :raised_hands:
+
+In short, we expect each participant to follow the [workshop's code of conduct](https://www.amstat.org/meetings/code-of-conduct). If you have any concerns, please reach out to the workshop organizers. 
+
 ## Set up
 
 Follow instructions in [R packages book system setup](https://r-pkgs.org/setup.html) to work locally. Note you can use your prefer IDE, if it is not Rstudio.
