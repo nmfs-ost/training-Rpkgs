@@ -35,7 +35,7 @@ Alternatively for GitHub Users, use a GitHub codespace. We have created a [templ
 
 ## Why create an R package?
 
-The R packages book calls the R package "the fundamental unit of shareable, reusable, and reproducible R code". Create an R package to:
+The R packages book calls the R package "the fundamental unit of shareable, reusable, and reproducible R code." Create an R package to:
 
 - organize code and/or data (or sometimes, other things like vignettes or a [Shiny App](https://mastering-shiny.org/scaling-packaging.html#scaling-packaging))
 - share code and/or data easily
