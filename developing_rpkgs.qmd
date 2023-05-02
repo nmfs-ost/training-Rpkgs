@@ -9,6 +9,7 @@ format:
   html:
     theme: cerulean
 editor: visual
+from: markdown+emoji
 ---
 
 ## NSAW Training Agenda
@@ -23,7 +24,7 @@ editor: visual
 
 ## Code of Conduct
 
-*Remember, this is a **"Yes, And!" environment**. There are no wrong answers!* We are all here to learn and support each other!
+*Remember, this is a **"Yes, And!" environment**. There are no wrong answers!* We are all here to learn and support each other!:raised_hands:
 
 In short, we expect each participant to follow the [workshop's code of conduct](https://www.amstat.org/meetings/code-of-conduct). If you have any concerns, please reach out to the workshop organizers. 
 
@@ -51,7 +52,7 @@ Alternatively for GitHub Users, use a GitHub codespace. We have created a [templ
 The R packages book calls the R package "the fundamental unit of shareable, reusable, and reproducible R code." Create an R package to:
 
 - organize code and/or data (or sometimes, other things like vignettes and [Shiny Applications](https://mastering-shiny.org/scaling-packaging.html#scaling-packaging))
-- share code and/or data
+- share code and/or data (e.g., [VRData](https://github.com/nwfsc-math-bio/VRData))
 - collaborate with others using standard conventions for organization (e.g., [IFA4EBFM](https://github.com/Bai-Li-NOAA/IFA4EBFM)
 - test and document using standard frameworks
 
