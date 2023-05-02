@@ -43,7 +43,7 @@ Feel free to share what you like, but here is an idea:
 
 ## Set up
 
-Follow instructions in [R packages book system setup](https://r-pkgs.org/setup.html) to work locally. Note you can use your preferred IDE, if it is not Rstudio.
+Follow instructions in [R packages book system setup](https://r-pkgs.org/setup.html) to work locally ([Personal startup configuration section](https://r-pkgs.org/setup.html#personal-startup-configuration) optional). Note you can use your preferred IDE, if it is not RStudio.
 
 Alternatively for GitHub Users, use a GitHub codespace. We have created a [template with instructions](https://github.com/NSAWTraining/RpkgsCodespace) for using this option. Note that the IDE in Codespaces is VS code.
 
