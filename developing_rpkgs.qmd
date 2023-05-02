@@ -373,6 +373,12 @@ To continue learning about package development, here are some resources:
 - [Eli Holmes' 2020 training on R packages](https://rverse-tutorials.github.io/RWorkflow-NWFSC-2020/week4-packages.html)
 - [Package Development: The Mechanics clinic by Maëlle Salmon](https://rpkgdev-mechanics.netlify.app/)
 
+## NMFS resources for help with R
+
+- [NMFS R User Group](https://nmfs-opensci.github.io/NMFS-R-UG/)
+- [NOAA FIT Resources](https://noaa-fisheries-integrated-toolbox.github.io/resources/)
+- [NMFS Open Science](https://nmfs-opensci.github.io/)
+
 ## Survey
 
 We would appreciate your feedback on this training in the survey we will email out.
