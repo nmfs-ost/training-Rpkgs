@@ -31,8 +31,8 @@ Alternatively for GitHub Users, use a GitHub codespace. We have created a [templ
 
 The R packages book calls the R package "the fundamental unit of shareable, reusable, and reproducible R code". Create an R package to:
 
-- organize code and/or data (or sometimes, other things like vignettes)
-- share code and/or data easily
+- organize code and/or data (or sometimes, other things like vignettes and Shiny applications)
+- share code and/or data
 - collaborate with others using standard conventions for organization
 - test and document using standard frameworks
 
@@ -318,6 +318,10 @@ Sharing on CRAN, [rOpenSci](https://ropensci.org/), or the [NOAA Fisheries Integ
 ### Style R code
 `styler::style_pkg()` styles R code according to the [tidyverse style guide](https://style.tidyverse.org/). It helps to keep the coding style consistent across files.
 
+### Setting up a Website for your Package
+
+You can use the `usethis` package make a website for your package on [GitHub pages site](https://pages.github.com/). This is done with `usethis::use_pkgdown_github_pages()` which creates a GitHub action that will update your package site. See the `usethis` documentation on how to do this [here](https://usethis.r-lib.org/reference/use_pkgdown.html).
+
 ### Setting up GitHub Actions
 
 The [{ghactions4r}](https://nmfs-fish-tools.github.io/ghactions4r/) package can be used to simplify maintenance and setup of common GitHub Action workflows for R packages.
@@ -332,3 +336,6 @@ To continue learning about package development, here are some resources:
 - [Eli Holmes' 2020 training on R packages](https://rverse-tutorials.github.io/RWorkflow-NWFSC-2020/week4-packages.html)
 - [Package Development: The Mechanics clinic by Maëlle Salmon](https://rpkgdev-mechanics.netlify.app/)
 
+## Survey
+
+We would appreciate your feedback on this training in the survey linked [here](https://docs.google.com/forms/d/e/1FAIpQLScH6z5xpDEWFzoTV9iIHApLNyJeVWmcXgNpmaWgIuhKkj1kuw/viewform?usp=sf_link). All surveys are anonymous.
