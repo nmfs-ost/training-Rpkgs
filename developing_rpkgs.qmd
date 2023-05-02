@@ -83,7 +83,7 @@ say("Welcome to cowsay!")
 say(what = "Let's look at cowsay!", by = "shark")
 ```
 
-There is also an option to get a fact about cats:
+There is also an option to get a fact about cats (note: this can sometimes throw an error locally because it needs to connect to an API):
 
 ```{r}
 say(what = "catfact")
