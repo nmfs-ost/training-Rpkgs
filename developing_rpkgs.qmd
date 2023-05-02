@@ -27,6 +27,18 @@ editor: visual
 
 In short, we expect each participant to follow the [workshop's code of conduct](https://www.amstat.org/meetings/code-of-conduct). If you have any concerns, please reach out to the workshop organizers. 
 
+## Introductions
+
+Let's learn a bit about each other and why we are here! 
+
+Feel free to share what you like, but here is an idea:
+- name
+- org/NOAA office
+- location
+- a bit about your job
+- what you are hoping to get out of the training
+- something you looking forward to during NSAW/MARVLS or in PVD!
+
 ## Set up
 
 Follow instructions in [R packages book system setup](https://r-pkgs.org/setup.html) to work locally. Note you can use your prefer IDE, if it is not Rstudio.
@@ -341,7 +353,9 @@ Sharing on CRAN, [rOpenSci](https://ropensci.org/), or the [NOAA Fisheries Integ
 
 ### Setting up a Website for your Package
 
-You can use the `usethis` package make a website for your package on [GitHub pages site](https://pages.github.com/). This is done with `usethis::use_pkgdown_github_pages()` which creates a GitHub action that will update your package site. See the `usethis` documentation on how to do this [here](https://usethis.r-lib.org/reference/use_pkgdown.html).
+`usethis::use_pkgdown()` creates a website using information from your R package that can be hosted on [GitHub Pages](https://pages.github.com/). It is possible to set up a GitHub Action to automatically update the website as you make changes to your code. There is a [NOAA Fisheries pkgdown template](https://noaa-fisheries-integrated-toolbox.github.io/resources/noaa%20resources/NOAA-pkgdown/) that can be used.
+
+See the [`usethis::use_pkgdown()` documentation](https://usethis.r-lib.org/reference/use_pkgdown.html) for more information on how to set up pkgdown and set up your own GitHub action that you maintain (alternatively, set up pkgdown and use the `ghactions4r::update_pkgdown()` workflow ([more details](https://nmfs-fish-tools.github.io/ghactions4r/index.html#how-do-i-use-these-workflows-in-my-r-package) so the GitHub Actions workflow maintainence is not on you.
 
 ### Setting up GitHub Actions
 
@@ -359,4 +373,4 @@ To continue learning about package development, here are some resources:
 
 ## Survey
 
-We would appreciate your feedback on this training in the survey linked [here](https://docs.google.com/forms/d/e/1FAIpQLScH6z5xpDEWFzoTV9iIHApLNyJeVWmcXgNpmaWgIuhKkj1kuw/viewform?usp=sf_link). All surveys are anonymous.
+We would appreciate your feedback on this training in the survey we will send out.
