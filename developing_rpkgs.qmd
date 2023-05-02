@@ -26,7 +26,7 @@ from: markdown+emoji
 
 *Remember, this is a **"Yes, And!" environment**. There are no wrong answers!* We are all here to learn and support each other!:raised_hands:
 
-In short, we expect each participant to follow the [workshop's code of conduct](https://www.amstat.org/meetings/code-of-conduct). If you have any concerns, please reach out to the workshop organizers. 
+In short, we expect each participant to follow the [workshop's code of conduct](https://docs.google.com/document/d/17LaR81rJBJ7Xe8YwHSdDmonfKQxDovZkAYA53vasrkw/edit?usp=sharing). If you have any concerns, please reach out to the workshop organizers. 
 
 ## Introductions
 
