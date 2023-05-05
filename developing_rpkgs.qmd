@@ -53,7 +53,7 @@ The R packages book calls the R package "the fundamental unit of shareable, reus
 
 - organize code and/or data (or sometimes, other things like vignettes and [Shiny Applications](https://mastering-shiny.org/scaling-packaging.html#scaling-packaging))
 - share code and/or data (e.g., [VRData](https://github.com/nwfsc-math-bio/VRData))
-- collaborate with others using standard conventions for organization (e.g., [IFA4EBFM](https://github.com/Bai-Li-NOAA/IFA4EBFM)
+- collaborate with others using standard conventions for organization (e.g., [IFA4EBFM](https://github.com/Bai-Li-NOAA/IFA4EBFM))
 - test and document using standard frameworks
 
 ## When should I create an R package?
@@ -125,7 +125,7 @@ Start designing your R package! Write 2 functions that you want to include in it
 
 Some questions to answer about the package:
 
-1. What do you want to name your package? (according to [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-structure), "[Package Names] should contain only (ASCII) letters, numbers and dot, have at least two characters and start with a letter and not end in a dot." This means no "_" in names are allowed). [`pak::pkg_name_check()](https://pak.r-lib.org/reference/pkg_name_check.html) will tell you if a name is already used on CRAN.
+1. What do you want to name your package? (according to [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-structure), "[Package Names] should contain only (ASCII) letters, numbers and dot, have at least two characters and start with a letter and not end in a dot." This means no "_" in names are allowed). [`pak::pkg_name_check()`](https://pak.r-lib.org/reference/pkg_name_check.html) will tell you if a name is already used on CRAN.
 2. Can you write a 2 sentence description of your package?
 3. What functions would you like to put in the package?
 4. How could you test your functions?
@@ -240,7 +240,7 @@ Within the RStudio IDE you can use a shortcut to add the {roxygen2} skeleton doc
 #'
 #' @param words 
 #'
-#' @returns
+#' @return
 #' @export
 #'
 #' @examples
@@ -262,8 +262,8 @@ Vignettes are instructive tutorials demonstrating practical uses of the package.
 If there is [data](https://r-pkgs.org/data.html) that you would like to make available in the package, you can include it using `usethis::use_data_raw()` which will create a folder called `data_raw` where you will add your dataset. From there, you will edit the `DATASET.R` file that was automatically created.
 
 If you would like to play around with some fake data, copy the following snippet into a .csv file:
+
 ```
-#| eval=FALSE
 name,num,rank
 test,4.2,3
 me,3.3,2
@@ -271,12 +271,15 @@ one,4.4,1
 two,5.5,4
 ```
 
+Then, run the code below to create the data file which contains your data as a `.rda` file. This code can also be added to the DATASET.R file that was automatically generated.
+
 ```{r}
 #| eval=FALSE
 your_data <- read.csv("data-raw/your_data.csv", header = TRUE)
 usethis::use_data(your_data, overwrite = TRUE) #by default names the data the same as the object.
 ```
-Running the code above will create the data file which contains your data as a `.rda` file. The data can be accessed with `data("your_data")`. You don't have to keep the data-raw folder after converting your data to `.rda`, although it is recommended to [preserve a dataset's origin story](https://r-pkgs.org/data.html#sec-data-data-raw).
+
+The data can be accessed with `data("your_data")`. You don't have to keep the data-raw folder after converting your data to `.rda`, although it is recommended to [preserve a dataset's origin story](https://r-pkgs.org/data.html#sec-data-data-raw).
 
 ## Add testing to your package
 
